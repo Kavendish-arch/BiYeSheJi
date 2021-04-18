@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>bootstrap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="tools/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <style>
+        </style>
+    </head> 
+    <body>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <span class="panel-title">表单</span>
+                            </div>
+                            <div class="col-lg-2" v-on:click="add" id="btn">
+                                <input type="button" value="增加"  class='btn btn-default btn-xs'/>
+                            </div>
+                            <div class="col-lg-1" v-on:click="save" id="btn1">
+                                <input type="button" value="保存"  class='btn btn-default btn-xs disabled'  id="a1"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body"  id="form">
+                    <form class="form">
+                            <div class="row">
+                                <!-- 姓名 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">姓名</span>
+                                            <input type="text" name="name" class="form-control" id="xingming" v-model="xingming">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 学号 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">学号</span>
+                                            <input type="text" name="xuehao" class="form-control" id="xuehao" v-model="xuehao">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <!-- 入学成绩 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">入学成绩</span>
+                                            <input type="text" name="chenji" class="form-control" id="chengji" v-model="chengji">
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <div class="row">
+                                <!-- 班级 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">班级</span>
+                                            <input type="text" name="clazz" class="form-control" id="bangji" v-model="bangji">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 性别     -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select class="form-control" name="sex" id="xingbie" v-model="xingbie" >
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                                <!-- 学历 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                            <select class="form-control" name="xueli" id="xueli"  v-model="xueli">
+                                                <option value="本科">本科</option>
+                                                <option value="大专">大专</option>
+                                                <option value="高中">高中</option>
+                                                <option value="本科以上">本科以上</option>
+                                            </select>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <!-- 身份证号 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">身份证号</span>
+                                            <input type="text" name="shenfen"  class="form-control" id="shenfen"  v-model="shenfen">
+                                        </div>
+                                    </div>
+                                </div>    
+                                <!-- 兴趣爱好 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                            <select class="form-control" name="xingqu" id="xingqu"  v-model="xingqu">
+                                                <option value="足球">足球</option>
+                                                <option value="篮球">篮球</option>
+                                                <option value="游泳">游泳</option>
+                                                <option value="打游戏">打游戏</option>
+                                            </select>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="wenben">自我介绍</label>
+                                        <textarea class="form-control" rows="6" id="wenben"  v-model="wenben"></textarea>    
+                                    </div>
+                                </div>
+                            </div>    
+                    </form>
+                </div>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>入学成绩</th>
+                            <th>班级</th>
+                            <th>性别</th>
+                            <th>学历</th>
+                            <th>删除</th>
+                            <th>编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr v-for="stu in stus">
+                            <td>{{stu.xuehao}}</td>
+                            <td>{{stu.name}}</td>
+                            <td>{{stu.pride}}</td>
+                            <td>{{stu.clazz}}</td>
+                            <td>{{stu.sex}}</td>
+                            <td>{{stu.xueli}}</td>
+                            <td><input type='button' class='btn btn-default btn-xs a1' value='删除' v-on:click='del(stu.xuehao)'></td>
+                            <td><input type='button' class='btn btn-default btn-xs a2' value='编辑' v-on:click='edit(stu.xuehao)'></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <script src="tools/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="tools/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src=" https://cdn.bootcss.com/vue/2.2.2/vue.min.js" type="text/javascript"></script>
+    <script>
+        //增加。
+        var index=-1;
+        var index=0;
+        var zen=new Vue({
+          el: '#tbody',
+          data: {
+            stus:[]
+             },
+         methods:{
+                del:function(xuehao){
+                    for(var i = 0; i < this.stus.length; i++) {
+                    if(this.stus[i].xuehao == xuehao) {
+                        index=i;    
+                    }else{
+                        continue;
+                    }
+                }
+                this.stus.splice(index,1);
+                },
+                edit:function(xuehao){
+                    for(var i = 0; i < this.stus.length; i++) {
+                    if(this.stus[i].xuehao == xuehao) {
+                        form.$data.xuehao=this.stus[i].xuehao;
+                        form.$data.xingming=this.stus[i].name;
+                        form.$data.chengji=this.stus[i].pride;
+                        form.$data.bangji=this.stus[i].clazz;
+                        form.$data.xingbie=this.stus[i].sex;
+                        form.$data.wenben=this.stus[i].wenben;
+                        form.$data.shenfen=this.stus[i].shenfen;
+                        form.$data.xingqu=this.stus[i].xingqu;
+                        form.$data.xueli=this.stus[i].xueli;
+                        index=i;
+                        $('#a1').removeClass("disabled");
+                    }
+                }
+
+                }
+            }
+         
+        })
+
+        var add=new Vue({
+          el: '#btn',
+          data: {
+           },
+            methods:{
+                add:function (){
+                    var xuehao=$('#xuehao').val();
+                    var name=$("#xingming").val();
+                    var pride=$("#chengji").val();
+                    var clazz=$("#bangji").val();
+                    var sex=$("#xingbie").val();
+                    var xueli=$("#xueli").val();
+                    var xingqu=$("#xingqu").val();
+                    var wenben=$("#wenben").val();
+                    var shenfen=$("#shenfen").val();
+                    var stu={};
+                    stu.name =name;
+                    stu.pride=pride;
+                    stu.clazz=clazz;
+                    stu.sex=sex;
+                    stu.xuehao=xuehao;
+                    stu.xueli=xueli;
+                    stu.xingqu=xingqu;
+                    stu.wenben=wenben;
+                    stu.shenfen=shenfen;
+                    zen.$data.stus.push(stu);
+                    form.$data.xingming = "";
+                    form.$data.xuehao = "";
+                    form.$data.chengji = "";
+                    form.$data.bangji = "";
+                    form.$data.xingbie = "";
+                    form.$data.xueli = "";
+                    form.$data.shenfen = "";
+                    form.$data.xingqu = "";
+                    form.$data.wenben = "";
+                }
+            
+          }
+        })
+        var baocun=new Vue({
+          el: '#btn1',
+            methods:{
+                save:function(){
+                    zen.$data.stus[index].xuehao=$('#xuehao').val();
+                    zen.$data.stus[index].name=$('#xingming').val();
+                    zen.$data.stus[index].sex=$('#xingbie').val();
+                    zen.$data.stus[index].xueli=$('#xueli').val();
+                    zen.$data.stus[index].shenfen=$('#shenfen').val();
+                    zen.$data.stus[index].wenben=$('#wenben').val();
+                    zen.$data.stus[index].chengji=$('#pride').val();
+                    zen.$data.stus[index].clazz=$('#bangji').val();
+                    zen.$data.stus[index].xingqu=$('#xingqu').val();
+                    form.$data.xingming = "";
+                    form.$data.xuehao = "";
+                    form.$data.chengji = "";
+                    form.$data.bangji = "";
+                    form.$data.xingbie = "";
+                    form.$data.xueli = "";
+                    form.$data.shenfen = "";
+                    form.$data.xingqu = "";
+                    form.$data.wenben = "";
+                    $('#a1').addClass("disabled");
+                }
+            }
+          
+        })
+
+        var form = new Vue({
+        el: '#form',
+        data: {
+            xuehao : "",
+            xingming : "",
+            chengji : "",
+            bangji : "",
+            xingbie : "",
+            xueli : "",
+            shenfen: "",
+            xingqu : "",
+            wenben : ""
+        }
+    })
+
+</script>
+    </body>
+</html>

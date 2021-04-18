@@ -1,35 +1,44 @@
 //// AJAX JS原生实现
 var xmlHttp;
 function loadXMLDoc(url_action){
+    
+    /**
+     * 
+     * 创建 XMLHttpRequest 对象
+     * 所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。
+     * 创建 XMLHttpRequest 对象的语法：variable=new XMLHttpRequest();
+     * 老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：
+     * variable=new ActiveXObject("Microsoft.XMLHTTP");
+     * 为了应对所有的现代浏览器，包括 IE5 和 IE6，请检查浏览器是否支持 XMLHttpRequest 对象。
+     * 如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject ：
+     */
+    
     xmlHttp = null;
-    if(window.XMLHttpRequest){  //CODE FOR IE7
+    if(window.XMLHttpRequest)
+    {  
+        //CODE FOR IE7
         xmlHttp = new XMLHttpRequest();
-    } else if(window.ActiveXObject('Microsoft.XMLHTTP')){
+    } 
+    else if(window.ActiveXObject('Microsoft.XMLHTTP'))
+    {
         // CODE FOR IE6 5 编译版本，// ActiveX -> COM // IE6, IE5
         xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
     }
     
     if(xmlHttp != null){
-        xmlHttp.onreadystatechange= startChange;
+        xmlHttp.onreadystatechange = startChange;
         xmlHttp.open('GET',url_action,true);
-/**
- *  GET  POST 
- */
         xmlHttp.send();
     } else {
         console.log("ERROR: xmlHttp init failed")
     }
-    
-    
     function startChange(){
         if(xmlHttp.readyState == 4){
             if(xmlHttp.status == 200){
                 var theDiv = document.getElementById('theD');
                 theDiv.innerHTML = xmlToHtml(xmlHttp.responseXML);
-                // xmlHttp.responseText;
-                            
+                // xmlHttp.responseText;  
                 // var xml = xmlHttp.responseXML;
-
             } else {
                 console.log("Error: whern retrying xml data" + xmlHttp.statusText)
             }
@@ -53,6 +62,38 @@ function loadXMLDoc(url_action){
         console.log(strTmp);
         return strTmp;
     }
+}
+
+function getmovie(url){
+    xmlHttp = null;
+    if(window.XMLHttpRequest){
+        xmlHttp = new XMLHttpRequest();
+    } 
+    else if(window.ActiveXObject('Microsoft.XMLHTTP')){
+        // CODE FOR IE6 5 编译版本，// ActiveX -> COM // IE6, IE5
+        xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    if (xmlHttp != null){
+        xmlHttp.onreadystatechange = startChange;
+        xmlHttp.open('GET', url, true);
+        console.log("h")
+        xmlHttp.send();
+    } else {
+        console.log("ERROR: xmlHttp init failed")
+    }
+    function startChange() {
+        if (xmlHttp.readyState == 4) {
+            if(xmlHttp.status == 200){
+                var theDiv = document.getElementById('theD');
+                
+                console.log(xmlHttp.responseText)            
+            } else {
+                console.log("Error: whern retrying xml data" + xmlHttp.statusText)
+            }
+        }
+    }
+        
+    
 }
 
 //
