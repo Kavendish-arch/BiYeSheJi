@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <script type="text/javascript">
+            function getJsonTxt() {
+                console.log("调用")
+                $.getJSON("http://localhost:8899/test").then(
+                function (result) {
+                    console.log(regsult)
+                })
+            }
+            function hello() {
+                console.log("hello")
+            }
+            $(function(){				
+            // 同源政策：
+            //     一个源的Cookie不能被另一个源读取
+            //     除了Cookie，还有LocalStorage，IndexDB，XmlHttpRequest
+                    
+//		$.getJSON('http://127.0.0.1:9092/ajax', $('#frm').serialize(), function(data){
+//		$('#theD').append(jsonToHTML(data));
+
+                // 用jQuery的$.ajax实现跨域
+                $('#btn').click(function(){
+                    $.ajax({
+                        type: 'get',
+                        url: 'http:\/\/127.0.0.1:8899/ajaxCrossDomain?callback=run' + '&p1=' + $('#p1').val() + '&p2=' + $('#p2').val(),
+                        // json with padding
+                        dataType: 'jsonp',
+                        success: run
+                    });
+                });
+            });
+            
+        </script>
+		
+<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<button type="button" onclick="getJsonTxt()">跨域访问</button>
+		
+	</body>
+</html>

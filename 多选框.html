@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <input type="checkbox" id="boxid" onclick="setAllNo()" />全选/全不选
+    <br />
+    <input type="checkbox" name="love" value="1" />篮球
+    <br />
+    <input type="checkbox" name="love" value="2" />排球
+    <br />
+    <input type="checkbox" name="love" value="3" />羽毛球
+    <br />
+    <input type="checkbox" name="love" value="4" />乒乓球
+    <br />
+    <input type="button" value="全选" onclick="setAll()" />
+    <input type="button" value="全不选" onclick="setNo()" />
+    <input type="button" value="反选" onclick="setOthers()" />
+    <input type="button" value="提交" onclick="getSelect()"/>
+    <script type="text/javascript">
+        //全选函数
+        function setAll() {
+            var loves = document.getElementsByName("love");
+            for (var i = 0; i < loves.length; i++) {
+                loves[i].checked = true;
+            }
+        }
+
+        //全不选函数
+        function setNo() {
+            var loves = document.getElementsByName("love");
+            for (var i = 0; i < loves.length; i++) {
+                loves[i].checked = false;
+            }
+        }
+
+        //反选
+        function setOthers() {
+            var loves = document.getElementsByName("love");
+            for (var i = 0; i < loves.length; i++) {
+                if (loves[i].checked == false)
+                    loves[i].checked = true;
+                else
+                    loves[i].checked = false;
+            }
+        }
+
+        //全选/全不选操作
+        function setAllNo(){
+            var box = document.getElementById("boxid");
+            var loves = document.getElementsByName("love");
+            if(box.checked == false){
+                for (var i = 0; i < loves.length; i++) {
+                    loves[i].checked = false;
+                }
+            }else{
+                for (var i = 0; i < loves.length; i++) {
+                    loves[i].checked = true;
+                    }
+            }
+        }
+        
+        function getSelect() {
+            var loves = document.getElementsByName("love");
+            console.log(loves);
+            var select = []; var x = 0;
+            for(var i = 0; i < loves.length; i++){
+                if(loves[i].check == true){
+                    console.log(loves)
+                    select[x++] = loves[i].value;
+                    console.log(loves[i]);
+                }
+            }
+            alert(select);
+        }
+    </script>
+
+</body>
+
+</html>

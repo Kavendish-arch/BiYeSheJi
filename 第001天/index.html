@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"/>
+</head>
+<body>
+
+<script>
+
+</script>
+
+<input type="text" id="name">
+<input type="text" id="password">
+<input onclick="hello()" type="button" value="登录"/>
+<div><p th:text=${msg} ng-app>Web app 下</p></div>
+
+<button id="send" onclick="send('/login.do')"> 发送 </button>
+<p id="checkNameMsg"></p>
+<button onclick="checkName('/checkName.do')" >发送数组</button>
+<button onclick="checkName('/listName.do')" >发送数组</button>
+<button onclick="sendList('/log/listName.do')">发对象数组</button>
+
+
+<script>
+    /**
+     * 生成数据
+     * @param {Object} name
+     * @param {Object} password
+     */
+    function Users(name, password){
+        this.userName = name;
+        this.password = password;
+    }
+    function hello() {
+        console.log("hello");
+        var name = document.getElementById('name').value;
+        var pwd = document.getElementById('password').value;
+        var user = new Users(name, pwd);
+        console.log(user)
+    }
+    function send(url, user) {
+        $.ajax({
+            type: 'post',
+            url: url,
+            async: true,
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(user),
+            success: function(data){
+                console.log(data);
+            },
+            error:function () {
+                console.log("error");
+            }
+        })
+    }
+
+</script>
+</body>
+
+
+</html>
