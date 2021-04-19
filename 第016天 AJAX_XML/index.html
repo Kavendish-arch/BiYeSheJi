@@ -47,17 +47,8 @@
 			</tr>
 		</table> -->
 <button onclick="loadXMLDoc('xml/data.xml')">Get XML</button>
-<button onclick="getmovie('http://127.0.0.1:5000/user_list/1')">get movie</button>
+<button onclick="getmovie('http://127.0.0.1:5000/get/1')">get movie</button>
 <div id="theD"></div>
-		<p>因此只要关闭浏览器的同源策略，就可以解决该跨域问题，关闭同源策略方法如下：
-1、浏览器地址栏输入：about:config ，接收风险并继续
-2、查询privacy.file_unique_origin首选项，双击或点击右边改为false，不开启该规则
-3、浏览器地址栏输入：about:restartrequired 重启浏览器
-
-关闭火狐浏览器同源策略方法来源：https://blog.csdn.net/u800820/article/details/100084999
-
-关闭同源策略后再执行代码，可以看到xmlhttp.status的返回值为200，（这里就不展示了），同时ajax请求本地文件成功，xmlhttp.responseText的内容是本地test.txt文件中的内容：
-</p>
 <script src="js/controller16-1.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

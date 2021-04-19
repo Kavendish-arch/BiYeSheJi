@@ -38,6 +38,7 @@ function getChildren(element){
 				children.push(a);
 			}
 		}
+        console.log("over")
 	}
 	
 	return children;

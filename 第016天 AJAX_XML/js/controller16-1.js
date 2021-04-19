@@ -63,7 +63,7 @@ function loadXMLDoc(url_action){
         return strTmp;
     }
 }
-
+var en_data = {}
 function getmovie(url){
     xmlHttp = null;
     if(window.XMLHttpRequest){
@@ -86,7 +86,13 @@ function getmovie(url){
             if(xmlHttp.status == 200){
                 var theDiv = document.getElementById('theD');
                 
-                console.log(xmlHttp.responseText)            
+                var jsondata = JSON.parse(xmlHttp.responseText)
+                en_data = jsondata
+                // console.log(jsondata)
+                for (var line in jsondata.movie){
+                    console.log(line, jsondata.movie[line])
+                }
+                // console.log(xmlHttp.responseText)            
             } else {
                 console.log("Error: whern retrying xml data" + xmlHttp.statusText)
             }
